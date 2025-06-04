@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        flatDir {
+            dirs './../wiz-gradle-plugin/build/libs'
+        }
+    }
+    dependencies {
+        classpath files('./../wiz-gradle-plugin/build/libs/wiz-gradle-plugin-0.1.0.jar')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: com.github.asamaraw.wiz.WizcliPlugin
+
+wiz {
+    projectId = 'example-project'
+    repositoryName = 'test-repo'
+}
+
+wizScanDir {
+    args '--projectId example-project --repositoryName test-repo'
+}
+
+version = '0.1.0'
+group = 'com.github.asamaraw.testgradle'
+
+repositories {
+    mavenCentral()
+}
+
+task hello {
+    doLast {
+        println 'Hello, World!'
+    }
+}
